@@ -44,7 +44,7 @@ const MainLayout = () => {
         }}
       >
         <div className="demo-logo-vertical" />
-        <div style={{color:"white",textAlign:"center", display:"flex",justifyContent: "center",justifyItems:"center"} }>
+        <div style={{color:"white",textAlign:"center", display:"flex",justifyContent: "center",alignItems:"center"} }>
             <h1 style={{height: "4rem"}}>Ph-Uni</h1>
         </div>
         <Menu
