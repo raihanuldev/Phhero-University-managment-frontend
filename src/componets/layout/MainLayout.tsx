@@ -1,34 +1,10 @@
 import React from 'react';
-import { Layout, Menu, MenuItemProps } from 'antd';
-import { NavLink, Outlet } from 'react-router-dom';
+import { Layout, Menu,  } from 'antd';
+import { Outlet } from 'react-router-dom';
+import { adminSidebarItems } from '../../routes/admin.routes';
 
 const { Header, Content, Footer, Sider } = Layout;
 
-const items: MenuItemProps["items"] = [
-    {
-        key:"Dashbord",
-        label: <NavLink to="Dashbord">Dashbord</NavLink>
-    },
-    {
-        key:"3",
-        label: "Managemnt ",
-        children: [
-            {
-                key:"Create admin",
-                label: <NavLink to="create-admin">Student Managment</NavLink>
-            },
-            {
-                key:"Create Faculty",
-                label: <NavLink to="create-faculty">Create Faculty</NavLink>
-            },
-            {
-              key:"Create Student",
-              label: <NavLink to="create-student">Create Student</NavLink>
-          }
-        ]
-    },
-]
-  
 
 const MainLayout = () => {
   return (
@@ -37,10 +13,10 @@ const MainLayout = () => {
         breakpoint="lg"
         collapsedWidth="0"
         onBreakpoint={(broken) => {
-          console.log(broken);
+          // console.log(broken);
         }}
         onCollapse={(collapsed, type) => {
-          console.log(collapsed, type);
+          // console.log(collapsed, type);
         }}
       >
         <div className="demo-logo-vertical" />
@@ -51,7 +27,7 @@ const MainLayout = () => {
           theme="dark"
           mode="inline"
           defaultSelectedKeys={["4"]}
-          items={items}
+          items={adminSidebarItems}
         />
       </Sider>
       <Layout>
