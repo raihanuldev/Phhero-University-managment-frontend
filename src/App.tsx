@@ -1,11 +1,7 @@
+import MainLayout from "./componets/layout/MainLayout";
 
 function App() {
-
-  return (
-    <>
-    <p>University Managment App</p>
-    </>
-  )
+  return <MainLayout />;
 }
 
-export default App
+export default App;
