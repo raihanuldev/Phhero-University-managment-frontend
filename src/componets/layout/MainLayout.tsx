@@ -1,5 +1,4 @@
 import React from 'react';
-import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
 import { Layout, Menu, MenuItemProps } from 'antd';
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -45,7 +44,7 @@ const MainLayout = () => {
       >
         <div className="demo-logo-vertical" />
         <div style={{color:"white",textAlign:"center", display:"flex",justifyContent: "center",alignItems:"center"} }>
-            <h1 style={{height: "4rem"}}>Ph-Uni</h1>
+            <h1 >Ph-Uni</h1>
         </div>
         <Menu
           theme="dark"
