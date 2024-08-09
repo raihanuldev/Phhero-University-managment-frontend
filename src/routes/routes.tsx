@@ -4,6 +4,8 @@ import AdminDashbord from "../pages/admin/AdminDashbord";
 import CreateStudent from "../pages/admin/CreateStudent";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import CreateFaculty from "../pages/admin/CreateFaculty";
+import CreateAdmin from "../pages/admin/CreateAdmin";
 
 const router = createBrowserRouter([
   {
@@ -14,14 +16,23 @@ const router = createBrowserRouter([
     path: "/admin",
     element: <App />,
     children: [
+        
       {
         path: "dashbord",
         element: <AdminDashbord />,
       },
       {
+        path: "create-admin",
+        element: <CreateAdmin />,
+      },
+      {
+        path: "create-faculty",
+        element: <CreateFaculty />,
+      },
+      {
         path: "create-student",
         element: <CreateStudent />,
-      },
+      }
     ],
   },
   {
