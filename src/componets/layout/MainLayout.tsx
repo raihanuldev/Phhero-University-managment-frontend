@@ -1,5 +1,6 @@
 import React from 'react';
 import { Layout, Menu, MenuItemProps } from 'antd';
+import { Outlet } from 'react-router-dom';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -62,8 +63,8 @@ const MainLayout = () => {
               minHeight: 360,
             }}
           >
-            <p>Main Content should go here</p>
-          </div>
+            <Outlet/>
+              </div>
         </Content>
         <Footer style={{ textAlign: "center" }}>
           Ant Design ©{new Date().getFullYear()} Created by Ant UED
