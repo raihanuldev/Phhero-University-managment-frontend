@@ -1,7 +1,7 @@
 const arr = [
   {
     name: "Dashbord",
-    path: "dashbord",
+    path: "/admin/dashbord",
     element: "ADMIN_DASHBORD",
   },
   {
@@ -9,42 +9,65 @@ const arr = [
     children: [
       {
         name: "Create Admin",
-        path: "create-admin",
+        path: "/admin/create-admin",
         element: "CREATE_ADMIN",
       },
       {
         name: "Create Faculty",
-        path: "create-faculty",
+        path: "/admin/create-faculty",
         element: "CREATE_FACULTY",
       },
       {
         name: "Create Admin",
-        path: "create-student",
+        path: "/admin/create-student",
         element: "CREATE_STUDENT",
       },
     ],
   },
 ];
 
-const result = arr.reduce((acc, item) => {
+// for sidebar 
+// const result = arr.reduce((acc, item) => {
 
-    if(item.path && item.element){
-        acc.push({
-            key:item.name,
-            label:item.path
-        })
-    }
-    if(item.children){
-       acc.push({
-        key: item.name,
-        label: item.path,
-        children: item.children.map((child)=>({
-            key: child.name,
-            label: child.path
-        }))
-       })
-    }
-  return acc;
-}, []);
+//     if(item.path && item.element){
+//         acc.push({
+//             key:item.name,
+//             label:item.path
+//         })
+//     }
+//     if(item.children){
+//        acc.push({
+//         key: item.name,
+//         label: item.path,
+//         children: item.children.map((child)=>({
+//             key: child.name,
+//             label: child.path
+//         }))
+//        })
+//     }
+//   return acc;
+// }, []);
 
-console.log(result);
+
+// for routes...........
+
+// const result = arr.reduce((acc, item) => {
+
+//     if(item.path && item.element){
+//         acc.push({
+//             path:item.path,
+//             element:item.element
+//         })
+//     }
+//     if(item.children){
+//         item.children.forEach((child)=>{
+//             acc.push({
+//                 path: child.path,
+//                 element:child.element,
+//             })
+//         })
+//     }
+//   return acc;
+// }, []);
+
+// console.log(result);
