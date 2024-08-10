@@ -3,14 +3,7 @@ import AdminDashbord from "../pages/admin/AdminDashbord";
 import CreateAdmin from "../pages/admin/CreateAdmin";
 import CreateFaculty from "../pages/admin/CreateFaculty";
 import CreateStudent from "../pages/admin/CreateStudent";
-import { TUserPath } from "../utilities/RouteGenerator";
 
-// Routes Type
-type TRoute = {
-  // name?: string;
-  path: string;
-  element: JSX.Element;
-};
 
 // Admin SIdebar Type
 type TAdminSidebar = {
