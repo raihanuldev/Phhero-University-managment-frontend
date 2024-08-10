@@ -1,16 +1,7 @@
-import { NavLink } from "react-router-dom";
 import AdminDashbord from "../pages/admin/AdminDashbord";
 import CreateAdmin from "../pages/admin/CreateAdmin";
 import CreateFaculty from "../pages/admin/CreateFaculty";
 import CreateStudent from "../pages/admin/CreateStudent";
-
-
-// Admin SIdebar Type
-type TAdminSidebar = {
-  key: string;
-  label: JSX.Element;
-  children?: TAdminSidebar[];
-};
 
 export const adminPaths = [
   {
@@ -40,29 +31,29 @@ export const adminPaths = [
   },
 ];
 
-// Admin SIdebar Programmatical logic
-export const adminSidebarItems = adminPaths.reduce(
-  (acc: TAdminSidebar[], item) => {
-    if (item.path && item.element) {
-      acc.push({
-        key: item.name,
-        label: <NavLink to={`/admin/${item.path}`}>{item.name}</NavLink>,
-      });
-    }
-    if (item.children) {
-      acc.push({
-        key: item.name,
-        label: <NavLink to={`/admin/${item.path}`}>{item.name}</NavLink>,
-        children: item.children.map((child) => ({
-          key: child.name,
-          label: <NavLink to={`/admin/${child.path}`}>{child.name}</NavLink>,
-        })),
-      });
-    }
-    return acc;
-  },
-  []
-);
+// // Admin SIdebar Programmatical logic
+// export const adminSidebarItems = adminPaths.reduce(
+//   (acc: TAdminSidebar[], item) => {
+//     if (item.path && item.element) {
+//       acc.push({
+//         key: item.name,
+//         label: <NavLink to={`/admin/${item.path}`}>{item.name}</NavLink>,
+//       });
+//     }
+//     if (item.children) {
+//       acc.push({
+//         key: item.name,
+//         label: <NavLink to={`/admin/${item.path}`}>{item.name}</NavLink>,
+//         children: item.children.map((child) => ({
+//           key: child.name,
+//           label: <NavLink to={`/admin/${child.path}`}>{child.name}</NavLink>,
+//         })),
+//       });
+//     }
+//     return acc;
+//   },
+//   []
+// );
 
 // export const adminRoutes = adminPaths2.reduce((acc, item) => {
 

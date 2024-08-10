@@ -1,16 +1,4 @@
-// Routes Type
-type TRoute = {
-//   name?: string; 
-  path: string;
-  element: JSX.Element;
-};
-
-export type TUserPath = {
-  name: string;
-  path: string;
-  element: JSX.Element;
-  children?: TRoute[];
-};
+import { TRoute, TUserPath } from "../types";
 
 export const RouteGenrator = (items: TUserPath[]) => {
   const routes = items.reduce((acc: TRoute[], item) => {
