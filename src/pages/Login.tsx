@@ -2,7 +2,7 @@ import { Button } from "antd";
 import { useForm } from "react-hook-form";
 import { useLoginMutation } from "../redux/features/auth/authApi";
 import { useAppDispatch } from "../redux/hooks";
-import { setUser } from "../redux/features/auth/AuthSlice";
+import { setUser, TUser } from "../redux/features/auth/AuthSlice";
 import { verifyToken } from "../utilities/verifyToken";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
@@ -18,7 +18,7 @@ const Login = () => {
     try {
       const res = await login(data).unwrap();
       // verifytoken to get userData
-      const user = verifyToken(res.data.accessToken);
+      const user = verifyToken(res.data.accessToken) as TUser;
       console.log(user);
       dispatch(setUser({ user: user, token: res.data.accessToken }));
       navigate(`/${user.role}/dashbord`)
