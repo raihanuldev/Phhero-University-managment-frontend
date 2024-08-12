@@ -4,18 +4,29 @@ import { useLoginMutation } from "../redux/features/auth/authApi";
 import { useAppDispatch } from "../redux/hooks";
 import { setUser } from "../redux/features/auth/AuthSlice";
 import { verifyToken } from "../utilities/verifyToken";
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
   const [login, { isError, data }] = useLoginMutation();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate()
 
   const onsubmit = async (data) => {
-    const res = await login(data).unwrap();
-    // verifytoken to get userData
-    const user = verifyToken(res.data.accessToken);
-    console.log(user);
-    dispatch(setUser({ user: user, token: res.data.accessToken }));
+    const toastId = toast.loading("Loginingggggggggg")
+    try {
+      const res = await login(data).unwrap();
+      // verifytoken to get userData
+      const user = verifyToken(res.data.accessToken);
+      console.log(user);
+      dispatch(setUser({ user: user, token: res.data.accessToken }));
+      navigate(`/${user.role}/dashbord`)
+      toast.success("Login Succesfully Mera User",toastId)
+    } catch (err) {
+      console.log(err);
+      toast.error("something Went Wrong!",toastId)
+    }
   };
   return (
     <form onClick={handleSubmit(onsubmit)}>
