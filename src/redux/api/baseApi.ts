@@ -34,7 +34,7 @@ const baseQueryWithRefreshToken = async(args,api,extraOPtions)=>{
     api.dispatch(
       setUser({
         user,
-        token: data.accessToken
+        token: data.data.accessToken
       })
     )
   }
