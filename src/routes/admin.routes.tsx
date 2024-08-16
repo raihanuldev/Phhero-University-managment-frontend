@@ -1,8 +1,12 @@
 import AcademicSemester from "../pages/admin/academic-managment/AcademicSemester";
+import CreateAcademicSemester from "../pages/admin/academic-managment/CreateAcademicSemester";
 import AdminDashbord from "../pages/admin/AdminDashbord";
-import CreateAdmin from "../pages/admin/CreateAdmin";
-import CreateFaculty from "../pages/admin/CreateFaculty";
-import CreateStudent from "../pages/admin/CreateStudent";
+// import CreateAdmin from "../pages/admin/CreateAdmin";
+import CreateFaculty from "../pages/admin/academic-managment/CreateFaculty";
+import AcademicFaculty from "../pages/admin/academic-managment/AcademicFaculty";
+import AcademicDepartment from "../pages/admin/academic-managment/AcademicDepartment";
+import CreateADepartment from "../pages/admin/academic-managment/CreateADepartment";
+// import CreateStudent from "../pages/admin/CreateStudent";
 
 export const adminPaths = [
   {
@@ -14,32 +18,38 @@ export const adminPaths = [
     name: "Academic Managemnt",
     children: [
       {
+        name: "Create A. Semester",
+        path: "create-academic-semester",
+        element: <CreateAcademicSemester />,
+      },
+      {
         name: "Academic Semester",
         path: "academic-semester",
         element: <AcademicSemester />,
-      }
-    ],
-  },
-  {
-    name: "Management",
-    children: [
-      {
-        name: "Create Admin",
-        path: "create-admin",
-        element: <CreateAdmin />,
       },
       {
-        name: "Create Faculty",
-        path: "create-faculty",
+        name: "Create A Faculty",
+        path: "create-academic-faculty",
         element: <CreateFaculty />,
       },
       {
-        name: "Create Student",
-        path: "create-student",
-        element: <CreateStudent />,
+        name: "Academic Faculty",
+        path: "academic-faculty",
+        element: <AcademicFaculty />,
+      },
+      {
+        name: "Create A. Department",
+        path: "create-academic-department",
+        element: <CreateADepartment />,
+      },
+      {
+        name: "Academic Department",
+        path: "academic-department",
+        element: <AcademicDepartment />,
       },
     ],
   },
+  
 ];
 
 // // Admin SIdebar Programmatical logic
