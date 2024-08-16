@@ -29,7 +29,7 @@ const Login = () => {
     }
   };
   return (
-    <form onClick={handleSubmit(onsubmit)}>
+    <form id="formArea" onClick={handleSubmit(onsubmit)}>
       <div>
         <label htmlFor="id">ID:</label>
         <input type="text" id="id" {...register("id")} />
