@@ -1,3 +1,5 @@
+import { TSemester } from "../../../types/aacademicMangment.type";
+import { TResponseRedux } from "../../../types/globalType";
 import { baseApi } from "../../api/baseApi";
 
 const academicMangmentApi = baseApi.injectEndpoints({
@@ -7,13 +9,13 @@ const academicMangmentApi = baseApi.injectEndpoints({
         url: "academic-semesters",
         method: "GET",
       }),
-      transformResponse: (response)=>{
+      transformResponse: (response: TResponseRedux<TSemester[]>) => {
         console.log("inside redux: ", response);
         return {
-            data: response?.data,
-            meta: response?.meta
-        }
-      }
+          data: response.data,
+          meta: response.meta,
+        };
+      },
     }),
     addAcademicSemester: builder.mutation({
       query: (data) => ({
@@ -24,4 +26,5 @@ const academicMangmentApi = baseApi.injectEndpoints({
     }),
   }),
 });
-export const { useAcademicSemesterQuery ,useAddAcademicSemesterMutation} = academicMangmentApi;
+export const { useAcademicSemesterQuery, useAddAcademicSemesterMutation } =
+  academicMangmentApi;
