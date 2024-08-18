@@ -7,14 +7,29 @@ const nameOptions = [
   { value: "02", label: "Summer" },
   { value: "03", label: "Fall" },
 ];
-// year optins
+
+// Year options
 const currentYear = new Date().getFullYear();
 const yearOptions = [0, 1, 2, 3, 4, 5].map((number) => ({
   value: String(currentYear + number),
   label: String(currentYear + number),
 }));
 
-console.log(yearOptions);
+// Month options with full month names as values
+const monthOptions = [
+  { value: "January", label: "January" },
+  { value: "February", label: "February" },
+  { value: "March", label: "March" },
+  { value: "April", label: "April" },
+  { value: "May", label: "May" },
+  { value: "June", label: "June" },
+  { value: "July", label: "July" },
+  { value: "August", label: "August" },
+  { value: "September", label: "September" },
+  { value: "October", label: "October" },
+  { value: "November", label: "November" },
+  { value: "December", label: "December" },
+];
 
 const CreateAcademicSemester = () => {
   const onSubmit = (data) => {
@@ -22,22 +37,21 @@ const CreateAcademicSemester = () => {
     const semesterData = {
       name,
       code: data.name,
-      year: data.year
+      year: data.year,
+      startMonth: data.startMonth, // Full month name
+      endMonth: data.endMonth, // Full month name
     };
     console.log(semesterData);
   };
+
   return (
     <Flex justify="center" align="center">
       <Col span={6}>
         <PHForm onSubmit={onSubmit}>
-          <PHSelect label="name" name="name" options={nameOptions} />
+          <PHSelect label="Name" name="name" options={nameOptions} />
           <PHSelect label="Year" name="year" options={yearOptions} />
-          <PHSelect
-            label="Start Month"
-            name="startMonth"
-            options={nameOptions}
-          />
-          <PHSelect label="End Month" name="endMonth" options={nameOptions} />
+          <PHSelect label="Start Month" name="startMonth" options={monthOptions} />
+          <PHSelect label="End Month" name="endMonth" options={monthOptions} />
           <Button htmlType="submit">Submit</Button>
         </PHForm>
       </Col>
