@@ -3,6 +3,8 @@ import PHForm from "../../../componets/form/PHForm";
 import PHSelect from "../../../componets/form/PHSelect";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { academicSemesterSchema } from "../../../schemas/academicMangement.schema";
+import { useAddAcademicSemesterMutation } from "../../../redux/features/admin/academicMangement.api";
+import { toast } from "sonner";
 
 const nameOptions = [
   { value: "01", label: "Autumn" },
@@ -33,8 +35,11 @@ const monthOptions = [
   { value: "December", label: "December" },
 ];
 
-const CreateAcademicSemester = () => {
-  const onSubmit = (data) => {
+const CreateAcademicSemester =  () => {
+
+  const [addAcademicSemester] = useAddAcademicSemesterMutation()
+
+  const onSubmit =async (data) => {
     const name = nameOptions[Number(data?.name - 1)]?.label;
     const semesterData = {
       name,
@@ -43,18 +48,28 @@ const CreateAcademicSemester = () => {
       startMonth: data.startMonth, // Full month name
       endMonth: data.endMonth, // Full month name
     };
-    console.log(semesterData);
+    try {
+     const res = await addAcademicSemester(semesterData);
+     console.log(res);
+    } catch (err) {
+      toast.error("Something Went Wrong")
+    }
   };
   return (
     <Flex justify="center" align="center">
       <Col span={6}>
-        <PHForm onSubmit={onSubmit}
-        resolver={zodResolver(academicSemesterSchema)}
+        <PHForm
+          onSubmit={onSubmit}
+          resolver={zodResolver(academicSemesterSchema)}
         >
           {/* in PHFORM resolver will add and make sure you have schema */}
           <PHSelect label="Name" name="name" options={nameOptions} />
           <PHSelect label="Year" name="year" options={yearOptions} />
-          <PHSelect label="Start Month" name="startMonth" options={monthOptions} />
+          <PHSelect
+            label="Start Month"
+            name="startMonth"
+            options={monthOptions}
+          />
           <PHSelect label="End Month" name="endMonth" options={monthOptions} />
           <Button htmlType="submit">Submit</Button>
         </PHForm>
