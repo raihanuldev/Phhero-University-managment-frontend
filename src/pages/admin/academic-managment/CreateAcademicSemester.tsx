@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { academicSemesterSchema } from "../../../schemas/academicMangement.schema";
 import { useAddAcademicSemesterMutation } from "../../../redux/features/admin/academicMangement.api";
 import { toast } from "sonner";
+import { TResponse } from "../../../types/globalType";
 
 const nameOptions = [
   { value: "01", label: "Autumn" },
@@ -50,7 +51,7 @@ const CreateAcademicSemester =  () => {
       endMonth: data.endMonth, // Full month name
     };
     try {
-     const res = await addAcademicSemester(semesterData);
+     const res = await addAcademicSemester(semesterData) as TResponse;
      if(res.error){
       toast.error(res.error.data.message,{id: toastId})
      } else{
@@ -59,6 +60,7 @@ const CreateAcademicSemester =  () => {
      console.log(res);
     } catch (err) {
       toast.error("Something Went Wrong",{id: toastId})
+      console.log(err);
     }
   };
   return (
