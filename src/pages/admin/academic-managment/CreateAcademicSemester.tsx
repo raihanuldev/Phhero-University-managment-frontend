@@ -1,17 +1,26 @@
 import { Button, Col, Flex } from "antd";
 import PHForm from "../../../componets/form/PHForm";
-import PHInput from "../../../componets/form/PHInput";
+import PHSelect from "../../../componets/form/PHSelect";
+
+const nameOptions = [
+  { value: "01", label: "Autumn" },
+  { value: "02", label: "Summer" },
+  { value: "03", label: "Fall" }
+];
 
 const CreateAcademicSemester = () => {
   const onSubmit = (data) => {
-    console.log(data);
+    const name = nameOptions[Number(data.name-1)].label
+    const semesterData = {
+        name,code:data.name
+    }
+    console.log(semesterData);
   };
   return (
     <Flex justify="center" align="center">
       <Col span={6}>
         <PHForm onSubmit={onSubmit}>
-          <PHInput type="text" name="name" label="name" />
-          <PHInput type="text" name="name" label="year" />
+          <PHSelect label="name" name="name" options={nameOptions} />
           <Button htmlType="submit">Submit</Button>
         </PHForm>
       </Col>
