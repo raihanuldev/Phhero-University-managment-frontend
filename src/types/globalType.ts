@@ -11,3 +11,5 @@ export type TResponse = {
   data?: any;
   error: TError;
 };
+
+// tableTypes
