@@ -1,7 +1,6 @@
 import { Button, Col, Flex } from "antd";
 import PHForm from "../../../componets/form/PHForm";
 import PHSelect from "../../../componets/form/PHSelect";
-import { z } from 'zod';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { academicSemesterSchema } from "../../../schemas/academicMangement.schema";
 

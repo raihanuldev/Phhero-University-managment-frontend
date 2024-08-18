@@ -1,6 +1,6 @@
-import { baseApi } from "../../../api/baseApi";
+import { baseApi } from "../../api/baseApi";
 
-const academicSemester = baseApi.injectEndpoints({
+const academicMangmentApi = baseApi.injectEndpoints({
     endpoints : (builder)=>({
         academicSemester: (builder.query({
             query: () => ({
@@ -10,4 +10,4 @@ const academicSemester = baseApi.injectEndpoints({
         })),
     }),
 })
-export const {useAcademicSemesterQuery} = academicSemester;
+export const {useAcademicSemesterQuery} = academicMangmentApi;
