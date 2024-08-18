@@ -1,6 +1,9 @@
 import { Button, Col, Flex } from "antd";
 import PHForm from "../../../componets/form/PHForm";
 import PHSelect from "../../../componets/form/PHSelect";
+import { z } from 'zod';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { academicSemesterSchema } from "../../../schemas/academicMangement.schema";
 
 const nameOptions = [
   { value: "01", label: "Autumn" },
@@ -43,11 +46,13 @@ const CreateAcademicSemester = () => {
     };
     console.log(semesterData);
   };
-
   return (
     <Flex justify="center" align="center">
       <Col span={6}>
-        <PHForm onSubmit={onSubmit}>
+        <PHForm onSubmit={onSubmit}
+        resolver={zodResolver(academicSemesterSchema)}
+        >
+          {/* in PHFORM resolver will add and make sure you have schema */}
           <PHSelect label="Name" name="name" options={nameOptions} />
           <PHSelect label="Year" name="year" options={yearOptions} />
           <PHSelect label="Start Month" name="startMonth" options={monthOptions} />
