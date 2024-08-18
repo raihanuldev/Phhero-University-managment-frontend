@@ -20,6 +20,17 @@ const AcademicSemester = () => {
     {
       title: "Name",
       dataIndex: "name",
+      showSorterTooltip: { target: "full-header" },
+      filters: [
+        {
+          text: "Joe",
+          value: "Joe",
+        },
+        {
+          text: "Jim",
+          value: "Jim",
+        },
+      ],
     },
     {
       title: "Year",
@@ -34,11 +45,19 @@ const AcademicSemester = () => {
       dataIndex: "endMonth",
     },
   ];
-
+  const onChange: TableProps<DataType>["onChange"] = (
+    pagination,
+    filters,
+    sorter,
+    extra
+  ) => {
+    console.log(filters);
+  };
   return (
     <Table
       columns={columns}
       dataSource={tableData}
+      onChange={onChange}
       showSorterTooltip={{ target: "sorter-icon" }}
     />
   );
