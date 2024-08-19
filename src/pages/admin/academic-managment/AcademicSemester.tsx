@@ -3,7 +3,7 @@ import { useAcademicSemesterQuery } from "../../../redux/features/admin/academic
 import { DataType } from "../../../types/TableType";
 
 const AcademicSemester = () => {
-  const { data: semesterData } = useAcademicSemesterQuery(undefined);
+  const { data: semesterData } = useAcademicSemesterQuery([{name: "name",value:"Fall"}]);
   //   console.log(semesterData);
 
   const tableData = semesterData?.data?.map(
@@ -58,6 +58,7 @@ const AcademicSemester = () => {
       columns={columns}
       dataSource={tableData}
       onChange={onChange}
+    
       showSorterTooltip={{ target: "sorter-icon" }}
     />
   );
