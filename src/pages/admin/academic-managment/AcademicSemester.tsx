@@ -2,10 +2,11 @@ import { Table, TableColumnsType, TableProps } from "antd";
 import { useAcademicSemesterQuery } from "../../../redux/features/admin/academicMangement.api";
 import { DataType } from "../../../types/TableType";
 import { useState } from "react";
+import { TQueryParam } from "../../../types/globalType";
 
 const AcademicSemester = () => {
   // setLocalState queryInfo
-  const [params, setParams] = useState([]);
+  const [params, setParams] = useState<TQueryParam[] | undefined>(undefined);
 
   const { data: semesterData, isFetching } = useAcademicSemesterQuery(params);
 
@@ -71,14 +72,14 @@ const AcademicSemester = () => {
     },
   ];
   const onChange: TableProps<DataType>["onChange"] = (
-    pagination,
+    _pagination,
     filters,
-    sorter,
+    _sorter,
     extra
   ) => {
     // Filter programmticale code for name
     if (extra.action === "filter") {
-      const queryParams = [] as any;
+      const queryParams: TQueryParam[] = [];
       filters.name?.forEach((item) => {
         queryParams.push({ name: "name", value: item });
       });
