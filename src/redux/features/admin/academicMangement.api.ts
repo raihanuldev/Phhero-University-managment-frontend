@@ -1,3 +1,4 @@
+import { TQueryParam } from "./../../../types/globalType";
 import { TSemester } from "../../../types/aacademicMangment.type";
 import { TResponseRedux } from "../../../types/globalType";
 import { baseApi } from "../../api/baseApi";
@@ -8,8 +9,8 @@ const academicMangmentApi = baseApi.injectEndpoints({
       query: (args) => {
         const params = new URLSearchParams();
         if (args) {
-          args.forEach(item => {
-            params.append(item.name, item.value);
+          args.forEach((item: TQueryParam) => {
+            params.append(item.name, item.value as string);
           });
         }
         return {
