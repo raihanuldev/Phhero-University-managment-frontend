@@ -7,7 +7,7 @@ const AcademicSemester = () => {
   // setLocalState queryInfo
   const [params, setParams] = useState([]);
 
-  const { data: semesterData } = useAcademicSemesterQuery(params);
+  const { data: semesterData, isFetching } = useAcademicSemesterQuery(params);
 
   const tableData = semesterData?.data?.map(
     ({ _id, name, year, startMonth, endMonth }) => ({
@@ -82,21 +82,15 @@ const AcademicSemester = () => {
       filters.name?.forEach((item) => {
         queryParams.push({ name: "name", value: item });
       });
-
-      setParams(queryParams);
-    }
-    // Filter programmticale code for year
-    if (extra.action === "filter") {
-      const queryParams = [] as any;
       filters.year?.forEach((item) => {
         queryParams.push({ name: "year", value: item });
       });
-
       setParams(queryParams);
     }
   };
   return (
     <Table
+      loading={isFetching}
       columns={columns}
       dataSource={tableData}
       onChange={onChange}
