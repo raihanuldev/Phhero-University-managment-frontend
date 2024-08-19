@@ -5,10 +5,11 @@ import { Button, Col, Flex } from "antd";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAddAcademicFacultyMutation } from "../../../redux/features/admin/academicMangement.api";
 import { toast } from "sonner";
+import { FieldValues, SubmitHandler } from "react-hook-form";
 
 const CreateFaculty = () => {
   const [AddAcademicFaculty] = useAddAcademicFacultyMutation();
-  const handleSubmit = async (data) => {
+  const handleSubmit:SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("Createing Faculty.....");
     const res = await AddAcademicFaculty(data)
     // console.log(res);
