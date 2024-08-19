@@ -5,6 +5,8 @@ import { baseApi } from "../../api/baseApi";
 
 const academicMangmentApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    // TODO: I need to Refector this code from differnt file under academic-Mangment folder.
+    // academic-Semester Managment
     academicSemester: builder.query({
       query: (args) => {
         const params = new URLSearchParams();
@@ -34,7 +36,18 @@ const academicMangmentApi = baseApi.injectEndpoints({
         body: data,
       }),
     }),
+    //Academic Faculty-Mangemnet
+    addAcademicFaculty: builder.mutation({
+      query: (data) => {
+        console.log("Inside Redux-api",data);
+        return {
+          url: "/academic-faculties/create-academic-faculty",
+          method: "POST",
+          body: data,
+        };
+      },
+    }),
   }),
 });
-export const { useAcademicSemesterQuery, useAddAcademicSemesterMutation } =
+export const { useAcademicSemesterQuery, useAddAcademicSemesterMutation, useAddAcademicFacultyMutation } =
   academicMangmentApi;
