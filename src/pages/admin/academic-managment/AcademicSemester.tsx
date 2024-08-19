@@ -4,8 +4,8 @@ import { DataType } from "../../../types/TableType";
 import { useState } from "react";
 
 const AcademicSemester = () => {
-    // setLocalState queryInfo 
-    const [params,setParams] = useState([]);
+  // setLocalState queryInfo
+  const [params, setParams] = useState([]);
 
   const { data: semesterData } = useAcademicSemesterQuery(params);
 
@@ -18,7 +18,7 @@ const AcademicSemester = () => {
       endMonth,
     })
   );
-//   console.log(tableData);
+  //   console.log(tableData);
   const columns: TableColumnsType<DataType> = [
     {
       title: "Name",
@@ -26,22 +26,40 @@ const AcademicSemester = () => {
       showSorterTooltip: { target: "full-header" },
       filters: [
         {
-            value: "Fall",
-            text: "Fall",
+          value: "Fall",
+          text: "Fall",
         },
         {
-            value: "Autumn",
-            text: "Autumn",
+          value: "Autumn",
+          text: "Autumn",
         },
         {
-            value: "Summer",
-            text: "Summer",
-        }
+          value: "Summer",
+          text: "Summer",
+        },
       ],
     },
     {
       title: "Year",
       dataIndex: "year",
+      filters: [
+        {
+          value: "2024",
+          text: "2024",
+        },
+        {
+          value: "2025",
+          text: "2025",
+        },
+        {
+          value: "2026",
+          text: "2026",
+        },
+        {
+          value: "2027",
+          text: "2027",
+        },
+      ],
     },
     {
       title: "Start Month",
@@ -58,23 +76,30 @@ const AcademicSemester = () => {
     sorter,
     extra
   ) => {
-    console.log(filters,extra);
-    if(extra.action === "filter"){
-        const queryParams = [] as any;
-        filters.name?.forEach((item)=>{
-            queryParams.push({name:"name",value: item}) 
-        })
+    // Filter programmticale code for name
+    if (extra.action === "filter") {
+      const queryParams = [] as any;
+      filters.name?.forEach((item) => {
+        queryParams.push({ name: "name", value: item });
+      });
 
-        setParams(queryParams)
+      setParams(queryParams);
     }
+    // Filter programmticale code for year
+    if (extra.action === "filter") {
+      const queryParams = [] as any;
+      filters.year?.forEach((item) => {
+        queryParams.push({ name: "year", value: item });
+      });
 
+      setParams(queryParams);
+    }
   };
   return (
     <Table
       columns={columns}
       dataSource={tableData}
       onChange={onChange}
-    
       showSorterTooltip={{ target: "sorter-icon" }}
     />
   );
