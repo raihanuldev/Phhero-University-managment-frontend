@@ -6,41 +6,14 @@ import { academicSemesterSchema } from "../../../schemas/academicMangement.schem
 import { useAddAcademicSemesterMutation } from "../../../redux/features/admin/academicMangement.api";
 import { toast } from "sonner";
 import { TResponse } from "../../../types/globalType";
-
-const nameOptions = [
-  { value: "01", label: "Autumn" },
-  { value: "02", label: "Summer" },
-  { value: "03", label: "Fall" },
-];
-
-// Year options
-const currentYear = new Date().getFullYear();
-const yearOptions = [0, 1, 2, 3, 4, 5].map((number) => ({
-  value: String(currentYear + number),
-  label: String(currentYear + number),
-}));
-
-// Month options with full month names as values
-const monthOptions = [
-  { value: "January", label: "January" },
-  { value: "February", label: "February" },
-  { value: "March", label: "March" },
-  { value: "April", label: "April" },
-  { value: "May", label: "May" },
-  { value: "June", label: "June" },
-  { value: "July", label: "July" },
-  { value: "August", label: "August" },
-  { value: "September", label: "September" },
-  { value: "October", label: "October" },
-  { value: "November", label: "November" },
-  { value: "December", label: "December" },
-];
+import { monthOptions, nameOptions, yearOptions } from "../../../utilities/FormInfo";
+import { FieldValues, SubmitHandler } from "react-hook-form";
 
 const CreateAcademicSemester =  () => {
 
   const [addAcademicSemester] = useAddAcademicSemesterMutation()
 
-  const onSubmit =async (data) => {
+  const onSubmit:SubmitHandler<FieldValues> =async (data) => {
     const toastId = toast.loading("Createing......")
     const name = nameOptions[Number(data?.name - 1)]?.label;
     const semesterData = {
