@@ -54,13 +54,25 @@ const CreateStudent = () => {
           <Row gutter={4}>
             <Divider>Personal Info</Divider>
             <Col span={24} md={12} lg={8}>
-              <PHInput type="text" name="name.fristName" label="Frist Name" />
+              <PHInput
+                type="text"
+                name="student.name.fristName"
+                label="Frist Name"
+              />
             </Col>
             <Col span={24} md={12} lg={8}>
-              <PHInput type="text" name="name.middleName" label="Middle Name" />
+              <PHInput
+                type="text"
+                name="student.name.middleName"
+                label="Middle Name"
+              />
             </Col>
             <Col span={24} md={12} lg={8}>
-              <PHInput type="text" name="name.lastName" label="Last Name" />
+              <PHInput
+                type="text"
+                name="student.name.lastName"
+                label="Last Name"
+              />
             </Col>
             <Col span={24} md={12} lg={8}>
               <PHInput type="text" name="gender" label="gender" />
@@ -77,16 +89,125 @@ const CreateStudent = () => {
               <PHInput type="text" name="student.email" label="Email" />
             </Col>
             <Col span={24} md={12} lg={8}>
-              <PHInput type="text" name="student.contactNo" label="Contact No" />
+              <PHInput
+                type="text"
+                name="student.contactNo"
+                label="Contact No"
+              />
             </Col>
             <Col span={24} md={12} lg={8}>
-              <PHInput type="text" name="student.emergencyContactNo" label="Emergency ContactNo" />
+              <PHInput
+                type="text"
+                name="student.emergencyContactNo"
+                label="Emergency ContactNo"
+              />
             </Col>
             <Col span={24} md={12} lg={8}>
-              <PHInput type="text" name="student.presentAddress" label="Present Address ContactNo" />
+              <PHInput
+                type="text"
+                name="student.presentAddress"
+                label="Present Address ContactNo"
+              />
             </Col>
             <Col span={24} md={12} lg={8}>
-              <PHInput type="text" name="student.permanentAddress" label="Permanent Address" />
+              <PHInput
+                type="text"
+                name="student.permanentAddress"
+                label="Permanent Address"
+              />
+            </Col>
+            {/* Gurdian info */}
+            <Divider>Gurdian Info</Divider>
+            <Col span={24} md={12} lg={8}>
+              <PHInput
+                type="text"
+                name="student.guardian.fatherName"
+                label="Father Name"
+              />
+            </Col>
+            <Col span={24} md={12} lg={8}>
+              <PHInput
+                type="text"
+                name="student.guardain.fatherOccupation"
+                label="Father Occupation"
+              />
+            </Col>
+            <Col span={24} md={12} lg={8}>
+              <PHInput
+                type="text"
+                name="student.guardain.fatherContactNo"
+                label="Fatcher ContactNo"
+              />
+            </Col>
+            <Col span={24} md={12} lg={8}>
+              <PHInput
+                type="text"
+                name="student.guardain.motherName"
+                label="Mother Name"
+              />
+            </Col>
+            <Col span={24} md={12} lg={8}>
+              <PHInput
+                type="text"
+                name="student.guardain.motherOccupation"
+                label="Mother Occupation"
+              />
+            </Col>
+            <Col span={24} md={12} lg={8}>
+              <PHInput
+                type="text"
+                name="student.guardain.motherContactNo"
+                label="motherContactNo"
+              />
+            </Col>
+
+            {/* Local Gurdian info */}
+            <Divider>Local Gurdian Info</Divider>
+            <Col span={24} md={12} lg={8}>
+              <PHInput
+                type="text"
+                name="student.localGuardian.name"
+                label="Name"
+              />
+            </Col>
+            <Col span={24} md={12} lg={8}>
+              <PHInput
+                type="text"
+                name="student.localGuardian.occupation"
+                label="Occupation"
+              />
+            </Col>
+            <Col span={24} md={12} lg={8}>
+              <PHInput
+                type="text"
+                name="student.localGuardian.contactNo"
+                label="ContactNo"
+              />
+            </Col>
+            <Col span={24} md={12} lg={8}>
+              <PHInput
+                type="text"
+                name="student.localGuardian.address"
+                label="Address"
+              />
+            </Col>
+            {/* Academic Info */}
+            <Divider>Academic Info</Divider>
+            <Col span={24} md={12} lg={8}>
+              <PHInput
+                type="text"
+                name="student.admissionSemester"
+                label="Admission Semester"
+                
+              />
+            </Col>
+            <Col span={24} md={12} lg={8}>
+              <PHInput
+                type="text"
+                name="student.academicDepartment"
+                label="Academic Department "
+                
+              />
             </Col>
           </Row>
           <Button htmlType="submit">Submit</Button>
