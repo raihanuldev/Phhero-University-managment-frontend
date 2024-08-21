@@ -18,7 +18,7 @@ const studentDammyData = {
     email: "student2@gmail.com",
     contactNo: "1235678",
     emergencyContactNo: "987-654-3210",
-    
+
     presentAddress: "123 Main St, Cityville",
     permanentAddress: "456 Oak St, Townsville",
     // gurdian info
@@ -70,6 +70,23 @@ const CreateStudent = () => {
             </Col>
             <Col span={24} md={12} lg={8}>
               <PHInput type="text" name="bloogGroup" label="Blood Gruop" />
+            </Col>
+            {/* Contat info */}
+            <Divider>Contact Info</Divider>
+            <Col span={24} md={12} lg={8}>
+              <PHInput type="text" name="student.email" label="Email" />
+            </Col>
+            <Col span={24} md={12} lg={8}>
+              <PHInput type="text" name="student.contactNo" label="Contact No" />
+            </Col>
+            <Col span={24} md={12} lg={8}>
+              <PHInput type="text" name="student.emergencyContactNo" label="Emergency ContactNo" />
+            </Col>
+            <Col span={24} md={12} lg={8}>
+              <PHInput type="text" name="student.presentAddress" label="Present Address ContactNo" />
+            </Col>
+            <Col span={24} md={12} lg={8}>
+              <PHInput type="text" name="student.permanentAddress" label="Permanent Address" />
             </Col>
           </Row>
           <Button htmlType="submit">Submit</Button>
