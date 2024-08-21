@@ -8,46 +8,47 @@ import {
   genderOptions,
   OccupationOptions,
 } from "../../../utilities/FormInfo";
+import PHDatePicker from "../../../componets/form/PHDatePicker";
 
-// const studentDammyData = {
-//   password: "student123",
-//   student: {
-//     name: {
-//       firstName: "I am ",
-//       middleName: "Student",
-//       lastName: "Number 1",
-//     },
-//     gender: "male",
-//     dateOfBirth: "1990-01-01",
-//     bloogGroup: "A+",
+const studentDammyData = {
+  password: "student123",
+  student: {
+    name: {
+      firstName: "I am ",
+      middleName: "Student",
+      lastName: "Number 1",
+    },
+    gender: "male",
+    dateOfBirth:"",
+    bloogGroup: "A+",
 
-//     email: "student2@gmail.com",
-//     contactNo: "1235678",
-//     emergencyContactNo: "987-654-3210",
+    email: "student2@gmail.com",
+    contactNo: "1235678",
+    emergencyContactNo: "987-654-3210",
 
-//     presentAddress: "123 Main St, Cityville",
-//     permanentAddress: "456 Oak St, Townsville",
-//     // gurdian info
-//     guardian: {
-//       fatherName: "James Doe",
-//       fatherOccupation: "Engineer",
-//       fatherContactNo: "111-222-3333",
-//       motherName: "Mary Doe",
-//       motherOccupation: "Teacher",
-//       motherContactNo: "444-555-6666",
-//     },
-//     // local info
-//     localGuardian: {
-//       name: "Alice Johnson",
-//       occupation: "Doctor",
-//       contactNo: "777-888-9999",
-//       address: "789 Pine St, Villageton",
-//     },
-//     // academic
-//     admissionSemester: "65b0104110b74fcbd7a25d92",
-//     academicDepartment: "65b00fb010b74fcbd7a25d8e",
-//   },
-// };
+    presentAddress: "123 Main St, Cityville",
+    permanentAddress: "456 Oak St, Townsville",
+    // gurdian info
+    guardian: {
+      fatherName: "James Doe",
+      fatherOccupation: "Engineer",
+      fatherContactNo: "111-222-3333",
+      motherName: "Mary Doe",
+      motherOccupation: "Teacher",
+      motherContactNo: "444-555-6666",
+    },
+    // local info
+    localGuardian: {
+      name: "Alice Johnson",
+      occupation: "Doctor",
+      contactNo: "777-888-9999",
+      address: "789 Pine St, Villageton",
+    },
+    // academic
+    admissionSemester: "65b0104110b74fcbd7a25d92",
+    academicDepartment: "65b00fb010b74fcbd7a25d8e",
+  },
+};
 
 const CreateStudent = () => {
   const handleSubmit: SubmitHandler<FieldValues> = (data) => {
@@ -56,7 +57,7 @@ const CreateStudent = () => {
   return (
     <Row>
       <Col span={24}>
-        <PHForm onSubmit={handleSubmit}>
+        <PHForm onSubmit={handleSubmit} defaultValues={studentDammyData}>
           <Row gutter={4}>
             <Divider>Personal Info</Divider>
             <Col span={24} md={12} lg={8}>
@@ -89,8 +90,7 @@ const CreateStudent = () => {
               />
             </Col>
             <Col span={24} md={12} lg={8}>
-              <PHInput
-                type="text"
+              <PHDatePicker
                 name="student.dateOfBirth"
                 label="Date Of Brith"
               />
