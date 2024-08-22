@@ -20,9 +20,9 @@ const CreateADepartment = () => {
   );
 
   const handleSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const res = await AddAcademicDepartment(data)
+    const res = await AddAcademicDepartment(data);
     console.log(res);
-    toast.success("Created Succefullyy")
+    toast.success("Created Succefullyy");
   };
   return (
     <Row justify="center">
