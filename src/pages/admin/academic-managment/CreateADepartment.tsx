@@ -3,16 +3,17 @@ import PHInput from "../../../componets/form/PHInput";
 import { Button, Col, Row } from "antd";
 import PHSelect from "../../../componets/form/PHSelect";
 import { useAcademicFacultysQuery } from "../../../redux/features/admin/academicMangement.api";
+import { FieldValues, SubmitHandler } from "react-hook-form";
 
 const CreateADepartment = () => {
     const {data:faculties} = useAcademicFacultysQuery(undefined)
 
-    const facultiesData = faculties?.data?.map((item) => ({
+    const facultiesData = faculties?.data?.map((item: { _id: string; name: string; }) => ({
         value: item._id,
         label: `${item.name}`,
       }));
 
-  const handleSubmit = async (data) => {
+  const handleSubmit:SubmitHandler<FieldValues> = async (data) => {
     console.log(data);
   };
   return (
