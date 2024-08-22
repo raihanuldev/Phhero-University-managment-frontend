@@ -39,7 +39,7 @@ const academicMangmentApi = baseApi.injectEndpoints({
     //Academic Faculty-Mangemnet
     addAcademicFaculty: builder.mutation({
       query: (data) => {
-        console.log("Inside Redux-api",data);
+        console.log("Inside Redux-api", data);
         return {
           url: "/academic-faculties/create-academic-faculty",
           method: "POST",
@@ -56,7 +56,33 @@ const academicMangmentApi = baseApi.injectEndpoints({
       },
     }),
 
+    // Department managemnt
+    // create a department
+    addAcademicDepartment: builder.mutation({
+      query: (data) => {
+        console.log("Inside Redux-api", data);
+        return {
+          url: "/academic-departments/create-academic-department",
+          method: "POST",
+          body: data,
+        };
+      },
+    }),
+    // Get all department
+    AcademicDepartment: builder.query({
+      query: () => {
+        return {
+          url: "/academic-departments",
+          method: "GET",
+        };
+      },
+    }),
   }),
 });
-export const { useAcademicSemesterQuery, useAddAcademicSemesterMutation, useAddAcademicFacultyMutation,useAcademicFacultysQuery } =
-  academicMangmentApi;
+
+export const {
+  useAcademicSemesterQuery,
+  useAddAcademicSemesterMutation,
+  useAddAcademicFacultyMutation,
+  useAcademicFacultysQuery,
+} = academicMangmentApi;

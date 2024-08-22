@@ -7,7 +7,7 @@ import { FieldValues, SubmitHandler } from "react-hook-form";
 
 const CreateADepartment = () => {
     const {data:faculties} = useAcademicFacultysQuery(undefined)
-
+    const [addDepartment] = 
     const facultiesData = faculties?.data?.map((item: { _id: string; name: string; }) => ({
         value: item._id,
         label: `${item.name}`,
