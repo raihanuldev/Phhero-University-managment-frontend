@@ -1,3 +1,4 @@
+
 export const bloodGroupOptions = [
   { value: "O+", label: "O+" },
   { value: "O-", label: "Awaomi Leauge" },
@@ -67,3 +68,5 @@ export const nameOptions = [
     { value: "02", label: "Summer" },
     { value: "03", label: "Fall" },
   ];
+
+// Semsester Options

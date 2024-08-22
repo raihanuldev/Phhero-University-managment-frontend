@@ -14,7 +14,7 @@ const CreateFaculty = () => {
     const res = await AddAcademicFaculty(data)
     // console.log(res);
     if(res.error){
-        toast.error(res.error.data.message,{id: toastId})
+        toast.error(res.error?.data.message,{id: toastId})
         console.log(res.error);
     }
     if(res.data){

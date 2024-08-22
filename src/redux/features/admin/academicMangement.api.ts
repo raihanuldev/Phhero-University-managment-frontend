@@ -47,7 +47,16 @@ const academicMangmentApi = baseApi.injectEndpoints({
         };
       },
     }),
+    academicFacultys: builder.query({
+      query: () => {
+        return {
+          url: "academic-faculties",
+          method: "GET",
+        };
+      },
+    }),
+
   }),
 });
-export const { useAcademicSemesterQuery, useAddAcademicSemesterMutation, useAddAcademicFacultyMutation } =
+export const { useAcademicSemesterQuery, useAddAcademicSemesterMutation, useAddAcademicFacultyMutation,useAcademicFacultysQuery } =
   academicMangmentApi;
