@@ -1,9 +1,8 @@
-import React from 'react';
 
 const CreateFaculty = () => {
     return (
         <div>
-            CreateFaculty
+            create
         </div>
     );
 };
