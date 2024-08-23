@@ -51,14 +51,12 @@ const studentDaMMY = {
       contactNo: "777-888-9999",
       address: "789 Pine St, Villageton",
     },
-    admissionSemester: "65b0104110b74fcbd7a25d92",
-    academicDepartment: "65b00fb010b74fcbd7a25d8e",
   },
 };
 
 const CreateStudent = () => {
   const { data: sData,isFetching } = useAcademicSemesterQuery(undefined);
-  const { data: departmentData } = useAcademicDepartmentQuery(undefined);
+  const { data: departmentData } = useAcademicDepartmentQuery(undefined,{skip: isFetching});
   const [addStudent, { data, error }] = useAddStudentMutation(undefined);
   console.log(data, error);
   // department Data
