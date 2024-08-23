@@ -9,22 +9,79 @@ import {
   OccupationOptions,
 } from "../../../utilities/FormInfo";
 import PHDatePicker from "../../../componets/form/PHDatePicker";
-import { useAcademicSemesterQuery } from "../../../redux/features/admin/academicMangement.api";
+import {
+  useAcademicDepartmentQuery,
+  useAcademicSemesterQuery,
+} from "../../../redux/features/admin/academicMangement.api";
+import { useAddStudentMutation } from "../../../redux/features/admin/userManagmentApi";
 
+// Maping Object Type
+type TItem = {
+  _id: string;
+  name: string;
+  year?: string;
+};
+
+const studentDaMMY = {
+  password: "student123",
+  student: {
+    name: {
+      firstName: "I am ",
+      middleName: "Student",
+      lastName: "Number 1",
+    },
+    gender: "male",
+    email: "student2@gmail.com",
+    contactNo: "1235678",
+    emergencyContactNo: "987-654-3210",
+    bloogGroup: "A+",
+    presentAddress: "123 Main St, Cityville",
+    permanentAddress: "456 Oak St, Townsville",
+    guardian: {
+      fatherName: "James Doe",
+      fatherOccupation: "Engineer",
+      fatherContactNo: "111-222-3333",
+      motherName: "Mary Doe",
+      motherOccupation: "Teacher",
+      motherContactNo: "444-555-6666",
+    },
+    localGuardian: {
+      name: "Alice Johnson",
+      occupation: "Doctor",
+      contactNo: "777-888-9999",
+      address: "789 Pine St, Villageton",
+    },
+    admissionSemester: "65b0104110b74fcbd7a25d92",
+    academicDepartment: "65b00fb010b74fcbd7a25d8e",
+  },
+};
 
 const CreateStudent = () => {
-  const { data: sData } = useAcademicSemesterQuery(undefined);
-  const semesterData = sData?.data?.map((item) => ({
+  const { data: sData,isFetching } = useAcademicSemesterQuery(undefined);
+  const { data: departmentData } = useAcademicDepartmentQuery(undefined);
+  const [addStudent, { data, error }] = useAddStudentMutation(undefined);
+  console.log(data, error);
+  // department Data
+  const departmentsNames = departmentData?.data?.map((item: TItem) => ({
+    value: item._id,
+    label: `${item.name}`,
+  }));
+  // console.log(departmentData);
+  // semester Data
+  const semesterData = sData?.data?.map((item: TItem) => ({
     value: item._id,
     label: `${item.name} ${item.year}`,
   }));
   const handleSubmit: SubmitHandler<FieldValues> = (data) => {
     console.log(data);
+    const formData = new FormData();
+    formData.append("data", JSON.stringify(data));
+    addStudent(formData);
   };
   return (
     <Row>
       <Col span={24}>
-        <PHForm onSubmit={handleSubmit}>
+        <PHForm onSubmit={handleSubmit} defaultValues={studentDaMMY}>
           <Row gutter={4}>
             <Divider>Personal Info</Divider>
             <Col span={24} md={12} lg={8}>
@@ -201,7 +258,7 @@ const CreateStudent = () => {
             </Col>
             <Col span={24} md={12} lg={8}>
               <PHSelect
-                options={semesterData}
+                options={departmentsNames}
                 name="student.academicDepartment"
                 label="Academic Department "
               />
