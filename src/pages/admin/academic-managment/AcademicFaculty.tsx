@@ -12,7 +12,7 @@ interface DataType {
 const AcademicFaculty = () => {
   const { data: datas, isFetching } = useAcademicFacultysQuery(undefined);
 
-  const handleUpdate = (data) => {
+  const handleUpdate = (data:any) => {
     console.log(data);
   };
 
