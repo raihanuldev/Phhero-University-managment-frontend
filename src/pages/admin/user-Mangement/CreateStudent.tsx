@@ -27,12 +27,12 @@ const studentDaMMY = {
   password: "student123",
   student: {
     name: {
-      firstName: "I am ",
+      firstName: "Rahan",
       middleName: "Student",
       lastName: "Number 1",
     },
     gender: "male",
-    email: "student2@gmail.com",
+    email: "studen2323t2@gmail.com",
     contactNo: "1235678",
     emergencyContactNo: "987-654-3210",
     bloogGroup: "A+",
@@ -81,19 +81,20 @@ const CreateStudent = () => {
 
     const formData = new FormData();
     formData.append("data", JSON.stringify(data));
+    formData.append("file",data.image)
     console.log(data);
-    // try {
-    //   const res = await addStudent(formData);
+    try {
+      const res = await addStudent(formData);
 
-    //   if (res.error) {
-    //     toast.error(`${res.error.data.message}`);
-    //   } else {
-    //     toast.success('Student added successfully!');
-    //   }
-    // } catch (error) {
-    //   console.error(error);
-    //   toast.error('An error occurred while adding the student.');
-    // }
+      if (res.error) {
+        toast.error(`${res.error.data.message}`);
+      } else {
+        toast.success('Student added successfully!');
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error('An error occurred while adding the student.');
+    }
   };
 
   return (
@@ -143,7 +144,7 @@ const CreateStudent = () => {
               />
             </Col>
             <Col span={24} md={12} lg={8}>
-              <Controller name="images" render={({ field: { onChange, value, ...filed } }) => {
+              <Controller name="image" render={({ field: { onChange, value, ...filed } }) => {
                   return <Form.Item label="Picture">
                   <Input
                     type="file"
