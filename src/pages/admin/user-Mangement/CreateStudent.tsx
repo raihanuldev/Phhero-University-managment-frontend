@@ -14,6 +14,7 @@ import {
   useAcademicSemesterQuery,
 } from "../../../redux/features/admin/academicMangement.api";
 import { useAddStudentMutation } from "../../../redux/features/admin/userManagmentApi";
+import { toast } from "sonner";
 
 // Maping Object Type
 type TItem = {
@@ -55,8 +56,10 @@ const studentDaMMY = {
 };
 
 const CreateStudent = () => {
-  const { data: sData,isFetching } = useAcademicSemesterQuery(undefined);
-  const { data: departmentData } = useAcademicDepartmentQuery(undefined,{skip: isFetching});
+  const { data: sData, isFetching } = useAcademicSemesterQuery(undefined);
+  const { data: departmentData } = useAcademicDepartmentQuery(undefined, {
+    skip: isFetching,
+  });
   const [addStudent, { data, error }] = useAddStudentMutation(undefined);
   console.log(data, error);
   // department Data
@@ -70,12 +73,29 @@ const CreateStudent = () => {
     value: item._id,
     label: `${item.name} ${item.year}`,
   }));
-  const handleSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log(data);
+  const handleSubmit: SubmitHandler<FieldValues> = async (data) => {
+    if (!data.student.admissionSemester || !data.student.academicDepartment) {
+      toast.error('Please fill in all required fields.');
+      return;
+    }
+  
     const formData = new FormData();
     formData.append("data", JSON.stringify(data));
-    addStudent(formData);
+  
+    try {
+      const res = await addStudent(formData);
+  
+      if (res.error) {
+        toast.error(`${res.error.data.message}`);
+      } else {
+        toast.success('Student added successfully!');
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error('An error occurred while adding the student.');
+    }
   };
+  
   return (
     <Row>
       <Col span={24}>
