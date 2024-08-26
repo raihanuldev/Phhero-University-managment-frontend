@@ -1,7 +1,7 @@
-import { Button, Col, Divider, Row } from "antd";
+import { Button, Col, Divider, Form, Input, Row } from "antd";
 import PHForm from "../../../componets/form/PHForm";
 import PHInput from "../../../componets/form/PHInput";
-import { FieldValues, SubmitHandler } from "react-hook-form";
+import { Controller, FieldValues, SubmitHandler } from "react-hook-form";
 import PHSelect from "../../../componets/form/PHSelect";
 import {
   bloodGroupOptions,
@@ -75,27 +75,27 @@ const CreateStudent = () => {
   }));
   const handleSubmit: SubmitHandler<FieldValues> = async (data) => {
     if (!data.student.admissionSemester || !data.student.academicDepartment) {
-      toast.error('Please fill in all required fields.');
+      toast.error("Please fill in all required fields.");
       return;
     }
-  
+
     const formData = new FormData();
     formData.append("data", JSON.stringify(data));
-  
-    try {
-      const res = await addStudent(formData);
-  
-      if (res.error) {
-        toast.error(`${res.error.data.message}`);
-      } else {
-        toast.success('Student added successfully!');
-      }
-    } catch (error) {
-      console.error(error);
-      toast.error('An error occurred while adding the student.');
-    }
+    console.log(data);
+    // try {
+    //   const res = await addStudent(formData);
+
+    //   if (res.error) {
+    //     toast.error(`${res.error.data.message}`);
+    //   } else {
+    //     toast.success('Student added successfully!');
+    //   }
+    // } catch (error) {
+    //   console.error(error);
+    //   toast.error('An error occurred while adding the student.');
+    // }
   };
-  
+
   return (
     <Row>
       <Col span={24}>
@@ -141,6 +141,18 @@ const CreateStudent = () => {
                 name="student.bloogGroup"
                 options={bloodGroupOptions}
               />
+            </Col>
+            <Col span={24} md={12} lg={8}>
+              <Controller name="images" render={({ field: { onChange, value, ...filed } }) => {
+                  return <Form.Item label="Picture">
+                  <Input
+                    type="file"
+                    value={value?.fileName}
+                    {...filed}
+                    onChange={(e) => onChange(e.target.files?.[0])} />
+                  ;
+                </Form.Item>;
+                }}/>
             </Col>
             {/* Contat info */}
             <Divider>Contact Info</Divider>
