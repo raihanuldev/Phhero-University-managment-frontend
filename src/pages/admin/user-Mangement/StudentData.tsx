@@ -1,6 +1,5 @@
 import { Button, Pagination, Space, Table, TableColumnsType } from "antd";
 import { useState } from "react";
-// import { TQueryParam } from "../../../types/globalType";
 import { useGetAllStudentsQuery } from "../../../redux/features/admin/userManagmentApi";
 import { TStudent } from "../../../types/userManagment.type";
 
@@ -10,8 +9,6 @@ export type TTableData = Pick<
 >;
 
 const StudentData = () => {
-  // setLocalState queryInfo
-  // const [params, setParams] = useState<TQueryParam[] | undefined>();
   const [page, setPages] = useState(1);
 
   const { data: studentData, isFetching } = useGetAllStudentsQuery([
@@ -20,8 +17,6 @@ const StudentData = () => {
     { name: "sort", value: "id" },
   ]);
   const metaData = studentData?.meta;
-  //   console.log(studentData);
-
   const tableData = studentData?.data?.map(
     ({ _id, fullName, id, email, contactNo }) => ({
       key: _id,
@@ -31,7 +26,6 @@ const StudentData = () => {
       contactNo,
     })
   );
-  //   console.log(tableData);
   const columns: TableColumnsType<TTableData> = [
     {
       title: "Name",
