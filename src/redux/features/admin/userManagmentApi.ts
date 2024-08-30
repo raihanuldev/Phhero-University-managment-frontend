@@ -55,7 +55,7 @@ const usersManagementApi = baseApi.injectEndpoints({
       query: (data) => {
         console.log("inside redux-api", data);
         return {
-          url: "users/create-faculty",
+          url: "users/create-admin",
           method: "POST",
           body: data,
         };

@@ -5,10 +5,14 @@ import PHSelect from "../../../componets/form/PHSelect";
 import { bloodGroupOptions, genderOptions } from "../../../utilities/FormInfo";
 import PHDatePicker from "../../../componets/form/PHDatePicker";
 import { Controller, FieldValues, SubmitHandler } from "react-hook-form";
+import { useAddAdminMutation } from "../../../redux/features/admin/userManagmentApi";
+import { toast } from "sonner";
 
 const CreateAdmin = () => {
+  const [addAdmin] = useAddAdminMutation();
   const adminDammyData = {
     password: "admin123",
+    id:"A-38210938",
     admin: {
       designation: "Admin",
       name: {
@@ -26,11 +30,22 @@ const CreateAdmin = () => {
     },
   };
 
-  const handleSubmit: SubmitHandler<FieldValues> = (data) => {
-    const formData = new FormData();
+  const handleSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const formData: FormData = new FormData();
     formData.append("data", JSON.stringify(data));
-    formData.append("file",data.image)
+    formData.append("file", data.image);
     console.log(data);
+    try {
+      const res = await addAdmin(formData);
+      console.log(res);
+      if (res.error) {
+        toast.error('Please try again !!');
+      } else {
+        toast.success('Admin added successfully!');
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <Row>
@@ -102,11 +117,7 @@ const CreateAdmin = () => {
               <PHInput type="text" name="admin.email" label="Email" />
             </Col>
             <Col span={24} md={12} lg={8}>
-              <PHInput
-                type="text"
-                name="admin.contactNo"
-                label="Contact No"
-              />
+              <PHInput type="text" name="admin.contactNo" label="Contact No" />
             </Col>
             <Col span={24} md={12} lg={8}>
               <PHInput
@@ -129,7 +140,6 @@ const CreateAdmin = () => {
                 label="Permanent Address"
               />
             </Col>
-           
           </Row>
           <Button htmlType="submit">Submit</Button>
         </PHForm>

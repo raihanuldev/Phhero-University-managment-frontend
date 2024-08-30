@@ -16,12 +16,12 @@ const CreateFaculty = () => {
     faculty: {
       designation: "Lecturer",
       name: {
-        firstName: "Mridul ",
-        middleName: "Das",
+        firstName: "Ikbal",
+        middleName: "Hydar",
         lastName: "Rahman",
       },
       gender: "male",
-      email: "faculty3@gmail.com",
+      email: "faculty@gmail.com",
       contactNo: "123",
       emergencyContactNo: "123",
       bloogGroup: "A+",
@@ -34,8 +34,9 @@ const CreateFaculty = () => {
     value: item._id,
     label: `${item.name}`,
   }));
-  const handleSubmit: SubmitHandler<FieldValues> = (data) => {
+  const handleSubmit: SubmitHandler<FieldValues> = async(data) => {
     console.log(data);
+    // const res = await 
   };
   return (
     <Row>
