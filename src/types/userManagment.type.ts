@@ -88,3 +88,55 @@ export interface TStudent {
     __v: number
   }
   
+
+  // Faculty type
+  export interface Root {
+    password: string
+    faculty: Faculty
+  }
+  
+  export interface Faculty {
+    designation: string
+    name: Name
+    gender: string
+    email: string
+    dateOfBirth: string
+    contactNo: string
+    emergencyContactNo: string
+    bloogGroup: string
+    presentAddress: string
+    permanentAddress: string
+    academicDepartment: string
+  }
+  
+  export interface Name {
+    firstName: string
+    middleName: string
+    lastName: string
+  }
+
+  // admin type
+  export interface Root {
+    password: string
+    admin: Admin
+  }
+  
+  export interface Admin {
+    designation: string
+    name: Name
+    gender: string
+    dateOfBirth: string
+    email: string
+    contactNo: string
+    emergencyContactNo: string
+    bloogGroup: string
+    presentAddress: string
+    permanentAddress: string
+  }
+  
+  export interface Name {
+    firstName: string
+    middleName: string
+    lastName: string
+  }
+  

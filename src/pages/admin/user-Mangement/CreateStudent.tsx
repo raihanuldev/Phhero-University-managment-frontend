@@ -15,13 +15,9 @@ import {
 } from "../../../redux/features/admin/academicMangement.api";
 import { useAddStudentMutation } from "../../../redux/features/admin/userManagmentApi";
 import { toast } from "sonner";
+import { TItem } from "../../../types/globalType";
 
-// Maping Object Type
-type TItem = {
-  _id: string;
-  name: string;
-  year?: string;
-};
+
 
 const studentDaMMY = {
   password: "student123",

@@ -30,3 +30,9 @@ export type TQueryParam = {
   value: boolean | React.Key;
 };
 
+// Maping Object Type
+export type TItem = {
+  _id: string;
+  name: string;
+  year?: string;
+};
