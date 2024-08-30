@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 // Routes Type
 export type TRoute = {
     name?: string;
@@ -8,9 +10,9 @@ export type TRoute = {
 // Admin SIdebar Type
 export type TSidebar = {
     key: string;
-    label: JSX.Element;
+    label: ReactNode;
     children?: TSidebar[];
-  };
+  }| undefined;
 
 
 export type TUserPath = {
