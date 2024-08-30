@@ -70,11 +70,18 @@ const academicMangmentApi = baseApi.injectEndpoints({
     }),
     // Get all department
     AcademicDepartment: builder.query({
-      query: () => {
-        return {
-          url: "/academic-departments",
-          method: "GET",
-        };
+      query: (args)=>{ 
+      const params = new URLSearchParams();
+      if (args) {
+        args.forEach((item: TQueryParam) => {
+          params.append(item.name, item.value as string);
+        });
+      }
+      return {
+        url: "academic-semesters",
+        method: "GET",
+        params: params,
+      };
       },
     }),
   }),

@@ -27,12 +27,10 @@ const studentDaMMY = {
   password: "student123",
   student: {
     name: {
-      firstName: "Rahan",
+      firstName: "Raihan",
       middleName: "Student",
-      lastName: "Number 1",
     },
     gender: "male",
-    email: "studen2323t2@gmail.com",
     contactNo: "1235678",
     emergencyContactNo: "987-654-3210",
     bloogGroup: "A+",
