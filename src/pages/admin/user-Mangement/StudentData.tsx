@@ -2,10 +2,11 @@ import { Button, Pagination, Space, Table, TableColumnsType } from "antd";
 import { useState } from "react";
 import { useGetAllStudentsQuery } from "../../../redux/features/admin/userManagmentApi";
 import { TStudent } from "../../../types/userManagment.type";
+import { Link } from "react-router-dom";
 
 export type TTableData = Pick<
   TStudent,
-  'fullName' | 'id' | 'email' | 'contactNo'
+  "fullName" | "id" | "email" | "contactNo"
 >;
 
 const StudentData = () => {
@@ -13,7 +14,6 @@ const StudentData = () => {
 
   const { data: studentData, isFetching } = useGetAllStudentsQuery([
     { name: "page", value: page },
-    { name: "limit", value: 3 },
     { name: "sort", value: "id" },
   ]);
   const metaData = studentData?.meta;
@@ -37,22 +37,25 @@ const StudentData = () => {
       dataIndex: "id",
     },
     {
-      title: 'Email',
-      key: 'email',
-      dataIndex: 'email',
+      title: "Email",
+      key: "email",
+      dataIndex: "email",
     },
     {
-      title: 'Contact No.',
-      key: 'contactNo',
-      dataIndex: 'contactNo',
+      title: "Contact No.",
+      key: "contactNo",
+      dataIndex: "contactNo",
     },
     {
       title: "Action",
       key: "action",
-      render: () => {
+      render: (item) => {
+
         return (
           <Space>
-            <Button>Details</Button>
+            <Link to={`/admin/student-data/${item.key}`}>
+              <Button>Details</Button>
+            </Link>
             <Button>Block</Button>
             <Button>Update</Button>
           </Space>
@@ -61,7 +64,7 @@ const StudentData = () => {
       width: "1%",
     },
   ];
-  
+
   return (
     <>
       <Table
@@ -71,7 +74,11 @@ const StudentData = () => {
         dataSource={tableData}
         showSorterTooltip={{ target: "sorter-icon" }}
       />
-      <Pagination onChange={(value)=>setPages(value)} total={metaData?.total} pageSize={metaData?.limit}/>
+      <Pagination
+        onChange={(value) => setPages(value)}
+        total={metaData?.total}
+        pageSize={metaData?.limit}
+      />
     </>
   );
 };
