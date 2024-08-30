@@ -4,7 +4,6 @@ import { baseApi } from "../../api/baseApi";
 
 const usersManagementApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-
     // Get Students
     getAllStudents: builder.query({
       query: (args) => {
@@ -40,7 +39,29 @@ const usersManagementApi = baseApi.injectEndpoints({
         };
       },
     }),
-    
+    // Create Faculty
+    addFaculty: builder.mutation({
+      query: (data) => {
+        console.log("inside redux-api", data);
+        return {
+          url: "users/create-faculty",
+          method: "POST",
+          body: data,
+        };
+      },
+    }),
+    // Create Admin
+    addAdmin: builder.mutation({
+      query: (data) => {
+        console.log("inside redux-api", data);
+        return {
+          url: "users/create-faculty",
+          method: "POST",
+          body: data,
+        };
+      },
+    }),
   }),
 });
-export const {useAddStudentMutation,useGetAllStudentsQuery} = usersManagementApi;
+export const { useAddStudentMutation, useGetAllStudentsQuery, useAddAdminMutation,useAddFacultyMutation } =
+  usersManagementApi;
