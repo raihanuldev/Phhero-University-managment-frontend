@@ -85,7 +85,7 @@ const CreateStudent = () => {
       const res = await addStudent(formData);
 
       if (res.error) {
-        toast.error(`${res.error.data.message}`);
+        toast.error(`${res.error.toString}`);
       } else {
         toast.success('Student added successfully!');
       }
