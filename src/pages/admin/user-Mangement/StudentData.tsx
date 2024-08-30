@@ -1,12 +1,17 @@
-import { Button, Pagination, Space, Table, TableColumnsType, TableProps } from "antd";
-import { DataType } from "../../../types/TableType";
+import { Button, Pagination, Space, Table, TableColumnsType } from "antd";
 import { useState } from "react";
-import { TQueryParam } from "../../../types/globalType";
+// import { TQueryParam } from "../../../types/globalType";
 import { useGetAllStudentsQuery } from "../../../redux/features/admin/userManagmentApi";
+import { TStudent } from "../../../types/userManagment.type";
+
+export type TTableData = Pick<
+  TStudent,
+  'fullName' | 'id' | 'email' | 'contactNo'
+>;
 
 const StudentData = () => {
   // setLocalState queryInfo
-  const [params, setParams] = useState<TQueryParam[] | undefined>();
+  // const [params, setParams] = useState<TQueryParam[] | undefined>();
   const [page, setPages] = useState(1);
 
   const { data: studentData, isFetching } = useGetAllStudentsQuery([
@@ -16,13 +21,18 @@ const StudentData = () => {
   ]);
   const metaData = studentData?.meta;
   //   console.log(studentData);
-  const tableData = studentData?.data?.map(({ _id, id, fullName }) => ({
-    _id,
-    fullName,
-    id,
-  }));
+
+  const tableData = studentData?.data?.map(
+    ({ _id, fullName, id, email, contactNo }) => ({
+      key: _id,
+      fullName,
+      id,
+      email,
+      contactNo,
+    })
+  );
   //   console.log(tableData);
-  const columns: TableColumnsType<DataType> = [
+  const columns: TableColumnsType<TTableData> = [
     {
       title: "Name",
       key: "name",
@@ -31,6 +41,16 @@ const StudentData = () => {
     {
       title: "Roll No.",
       dataIndex: "id",
+    },
+    {
+      title: 'Email',
+      key: 'email',
+      dataIndex: 'email',
+    },
+    {
+      title: 'Contact No.',
+      key: 'contactNo',
+      dataIndex: 'contactNo',
     },
     {
       title: "Action",
@@ -47,24 +67,7 @@ const StudentData = () => {
       width: "1%",
     },
   ];
-  const onChange: TableProps<DataType>["onChange"] = (
-    _pagination,
-    filters,
-    _sorter,
-    extra
-  ) => {
-    // Filter programmticale code for name
-    if (extra.action === "filter") {
-      const queryParams: TQueryParam[] = [];
-      filters.name?.forEach((item) => {
-        queryParams.push({ name: "name", value: item });
-      });
-      filters.year?.forEach((item) => {
-        queryParams.push({ name: "year", value: item });
-      });
-      setParams(queryParams);
-    }
-  };
+  
   return (
     <>
       <Table
@@ -72,7 +75,6 @@ const StudentData = () => {
         loading={isFetching}
         columns={columns}
         dataSource={tableData}
-        onChange={onChange}
         showSorterTooltip={{ target: "sorter-icon" }}
       />
       <Pagination onChange={(value)=>setPages(value)} total={metaData?.total} pageSize={metaData?.limit}/>
