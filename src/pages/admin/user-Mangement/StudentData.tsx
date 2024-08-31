@@ -1,4 +1,11 @@
-import { Button, Pagination, Space, Table, TableColumnsType } from "antd";
+import {
+  Button,
+  Modal,
+  Pagination,
+  Space,
+  Table,
+  TableColumnsType,
+} from "antd";
 import { useState } from "react";
 import { useGetAllStudentsQuery } from "../../../redux/features/admin/userManagmentApi";
 import { TStudent } from "../../../types/userManagment.type";
@@ -10,6 +17,17 @@ export type TTableData = Pick<
 >;
 
 const StudentData = () => {
+  // modal
+  const [open, setOpen] = useState(false);
+
+  
+  const handleOk = () => {
+    setOpen(false);
+  };
+
+  const handleCancel = () => {
+    setOpen(false);
+  };
   const [page, setPages] = useState(1);
 
   const { data: studentData, isFetching } = useGetAllStudentsQuery([
@@ -50,13 +68,27 @@ const StudentData = () => {
       title: "Action",
       key: "action",
       render: (item) => {
-
         return (
           <Space>
             <Link to={`/admin/student-data/${item.key}`}>
               <Button>Details</Button>
             </Link>
-            <Button>Block</Button>
+            <Button
+              onClick={() => {
+                Modal.confirm({
+                  title: "Confirm",
+                  content: "Are you Want to block ??",
+                  footer: (_, { OkBtn, CancelBtn }) => (
+                    <>
+                      <CancelBtn />
+                      <OkBtn />
+                    </>
+                  ),
+                });
+              }}
+            >
+              Block
+            </Button>
             <Button>Update</Button>
           </Space>
         );
@@ -79,6 +111,19 @@ const StudentData = () => {
         total={metaData?.total}
         pageSize={metaData?.limit}
       />
+      {/* Modal Body */}
+      <Modal
+        open={open}
+        title="Title"
+        onOk={handleOk}
+        onCancel={handleCancel}
+        footer={(_, { OkBtn, CancelBtn }) => (
+          <>
+            <CancelBtn />
+            <OkBtn />
+          </>
+        )}
+      ></Modal>
     </>
   );
 };
