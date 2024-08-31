@@ -12,7 +12,6 @@ const CreateAdmin = () => {
   const [addAdmin] = useAddAdminMutation();
   const adminDammyData = {
     password: "admin123",
-    id:"A-38210938",
     admin: {
       designation: "Admin",
       name: {

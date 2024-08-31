@@ -5,11 +5,16 @@ import PHSelect from "../../../componets/form/PHSelect";
 import { bloodGroupOptions, genderOptions } from "../../../utilities/FormInfo";
 import PHDatePicker from "../../../componets/form/PHDatePicker";
 import { Controller, FieldValues, SubmitHandler } from "react-hook-form";
-import { useAcademicDepartmentQuery } from "../../../redux/features/admin/academicMangement.api";
+import {
+  useAcademicDepartmentQuery,
+  useAddAcademicFacultyMutation,
+} from "../../../redux/features/admin/academicMangement.api";
 import { TItem } from "../../../types/globalType";
-
+import { toast } from "sonner";
+import { useAddFacultyMutation } from "../../../redux/features/admin/userManagmentApi";
 
 const CreateFaculty = () => {
+  const [addFaculty] = useAddFacultyMutation();
   const { data: departmentData } = useAcademicDepartmentQuery(undefined);
   const facultyDammyData = {
     password: "faculty123",
@@ -34,14 +39,28 @@ const CreateFaculty = () => {
     value: item._id,
     label: `${item.name}`,
   }));
-  const handleSubmit: SubmitHandler<FieldValues> = async(data) => {
+  const handleSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const formData = new FormData();
+    formData.append("data", JSON.stringify(data));
+    formData.append("file", data.image);
     console.log(data);
-    // const res = await 
+    try {
+      const res = await addFaculty(formData);
+      console.log(res);
+      if (res.error) {
+        toast.error(`${res.error}`);
+      } else {
+        toast.success("Facul;ty added successfully!");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("An error occurred while adding the Faculty.");
+    }
   };
   return (
     <Row>
       <Col span={24}>
-        <PHForm onSubmit={handleSubmit} defaultValues={facultyDammyData}>
+        <PHForm onSubmit={handleSubmit}>
           <Row gutter={4}>
             <Divider>Personal Info</Divider>
             <Col span={24} md={12} lg={8}>
@@ -59,11 +78,7 @@ const CreateFaculty = () => {
               />
             </Col>
             <Col span={24} md={12} lg={8}>
-              <PHInput
-                type="text"
-                name=".name.lastName"
-                label="Last Name"
-              />
+              <PHInput type="text" name=".name.lastName" label="Last Name" />
             </Col>
             <Col span={24} md={12} lg={8}>
               {/* <PHInput type="text" name="faculty.gender" label="gender" /> */}
