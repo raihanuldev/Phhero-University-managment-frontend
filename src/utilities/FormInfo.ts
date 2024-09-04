@@ -68,5 +68,10 @@ export const nameOptions = [
     { value: "02", label: "Summer" },
     { value: "03", label: "Fall" },
   ];
+export const StatusOptions = [
+    { value: "UPCOMING", label: "UPCOMING" },
+    { value: "ONGOING", label: "ONGOING" },
+    { value: "END", label: "END" },
+  ];
 
 // Semsester Options
