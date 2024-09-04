@@ -47,7 +47,7 @@ const CreateFaculty = () => {
     try {
       const res = await addFaculty(formData);
       console.log(res);
-      if (res.error) {
+      if (res.error) { 
         toast.error(`${res.error}`);
       } else {
         toast.success("Facul;ty added successfully!");

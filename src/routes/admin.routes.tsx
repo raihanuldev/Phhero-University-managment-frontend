@@ -11,6 +11,11 @@ import CreateFaculty from "../pages/admin/user-Mangement/CreateFaculty";
 import CreateStudent from "../pages/admin/user-Mangement/CreateStudent";
 import StudentData from "../pages/admin/user-Mangement/StudentData";
 import StudentDetails from "../pages/admin/user-Mangement/StudentDetails";
+import SemesterRegister from "../pages/admin/coures-managment/SemesterRegister";
+import RegistedSemester from "../pages/admin/coures-managment/RegistedSemester";
+import CreateCoures from "../pages/admin/coures-managment/CreateCoures";
+import OfferCoures from "../pages/admin/coures-managment/OfferCoures";
+import OfferedCoures from "../pages/admin/coures-managment/OfferedCoures";
 // import CreateStudent from "../pages/admin/CreateStudent";
 
 export const adminPaths = [
@@ -81,6 +86,37 @@ export const adminPaths = [
         path: "create-student",
         element: <CreateStudent />,
       },
+      
+    ],
+  },
+  {
+    name: "Coures Managemnt",
+    children: [
+      {
+        name: "Semester Register",
+        path: "semester-register",
+        element: <SemesterRegister />,
+      },
+      {
+        name: "Registered Semester",
+        path: "Registered-semester",
+        element: <RegistedSemester />,
+      },
+      {
+        name:"Create Coures",
+        path: "create-coures",
+        element: <CreateCoures/>
+      },
+      {
+        name:"offer Coures",
+        path:"offer-coures",
+        element:<OfferCoures/>
+      },
+      {
+        name:"offered Coures",
+        path:"offered-coures",
+        element:<OfferedCoures/>
+      }
       
     ],
   },
