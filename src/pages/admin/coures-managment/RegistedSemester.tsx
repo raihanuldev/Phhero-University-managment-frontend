@@ -1,8 +1,11 @@
 import { Button, Table, TableColumnsType } from "antd";
-import { DataType } from "../../../types/TableType";
 import { useAllSemesterRegistedQuery } from "../../../redux/features/admin/couresMangment";
 import { TRegistedSemester } from "../../../types/couresMangment";
 import moment from "moment";
+
+
+export type tableData= Pick<TRegistedSemester,"startDate"| "endDate"| "endDate"|"status">
+
 
 const RegistedSemester = () => {
   const { data: registedSemester } = useAllSemesterRegistedQuery(undefined);
@@ -18,7 +21,7 @@ const RegistedSemester = () => {
     })
   );
   //   console.log(tableData);
-  const columns: TableColumnsType<TRegistedSemester> | undefined = [
+  const columns: TableColumnsType<tableData> = [
     {
       title: "Semester Name",
       dataIndex: "name",
