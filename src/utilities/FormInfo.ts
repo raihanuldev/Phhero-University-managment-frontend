@@ -71,7 +71,7 @@ export const nameOptions = [
 export const StatusOptions = [
     { value: "UPCOMING", label: "UPCOMING" },
     { value: "ONGOING", label: "ONGOING" },
-    { value: "END", label: "END" },
+    { value: "ENDED", label: "ENDED" },
   ];
 
 // Semsester Options
