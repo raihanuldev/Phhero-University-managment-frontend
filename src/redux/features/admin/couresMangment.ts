@@ -34,6 +34,7 @@ const academicMangmentApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ['semester']
     }),
     updateSemesterRegister: builder.mutation({
       query: (args) => ({
