@@ -19,6 +19,7 @@ const academicMangmentApi = baseApi.injectEndpoints({
           params: params,
         };
       },
+      providesTags:['semester'],
       transformResponse: (response: TResponseRedux<TRegistedSemester[]>) => {
         console.log("inside redux: ", response);
         return {
@@ -34,7 +35,15 @@ const academicMangmentApi = baseApi.injectEndpoints({
         body: data,
       }),
     }),
+    updateSemesterRegister: builder.mutation({
+      query: (args) => ({
+        url: `/semester-registrations/${args.id}`,
+        method: "PATCH",
+        body: args.data,
+      }),
+      invalidatesTags: ['semester']
+    }),
   }),
 });
 
-export const {useAllSemesterRegistedQuery,useAddSemesterRegisterMutation} = academicMangmentApi;
+export const {useAllSemesterRegistedQuery,useAddSemesterRegisterMutation,useUpdateSemesterRegisterMutation} = academicMangmentApi;
