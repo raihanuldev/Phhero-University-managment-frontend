@@ -4,12 +4,29 @@ import PHSelect from "../../../componets/form/PHSelect";
 import { toast } from "sonner";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import PHInput from "../../../componets/form/PHInput";
+import { useAddCouresMutation, useGetAllCouresQuery } from "../../../redux/features/admin/couresMangment";
 
 const CreateCoures = () => {
- 
+  const { data: coures } = useGetAllCouresQuery(undefined);
+  const [addCoures] = useAddCouresMutation()
+  // console.log(coures);
+  const preRequisiteCoursesOptions = coures?.data?.map((item)=>({
+    value: item._id,
+    label: item.title
+  }))
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("Createing......");
-    console.log(data);
+    const couresData = {
+      ...data,
+      isDeleted: false,
+      preRequisiteCourses: data.preRequisiteCourses.map((item)=>({
+        coures: item,
+        isDeleted: false
+      }))
+    }
+    console.log(couresData);
+    const res=addCoures(couresData)
+    console.log(res);
     // try {
     //   const res = (await AddSemesterRegister(semesterData)) as TResponse<any>;
     //   if (res.error) {
@@ -31,8 +48,12 @@ const CreateCoures = () => {
           <PHInput label="Prefix" type="text" name="prefix" />
           <PHInput label="Code" type="number" name="code" />
           <PHInput label="Credits" type="number" name="credits" />
-          <PHSelect label="Is Deleted?" name="isDeleted" options={[{label:"True",value:true},{label:"False",value:false}]}/>
-          <PHSelect mode="multiple" label="Pre RequisiteCourses" name="preRequisiteCourses" options={[{label:"ree",value:"dsds"},{label:"ree",value:"dsds"}]}/>
+          <PHSelect
+            mode="multiple"
+            label="Pre RequisiteCourses"
+            name="preRequisiteCourses"
+            options={preRequisiteCoursesOptions}
+          />
           <Button htmlType="submit">Submit</Button>
         </PHForm>
       </Col>
@@ -41,7 +62,6 @@ const CreateCoures = () => {
 };
 
 export default CreateCoures;
-
 
 // body type
 // {

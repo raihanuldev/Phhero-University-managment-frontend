@@ -44,7 +44,40 @@ const academicMangmentApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['semester']
     }),
+    // Coures
+    getAllCoures: builder.query({
+      query: (args) => {
+        const params = new URLSearchParams();
+        if (args) {
+          args.forEach((item: TQueryParam) => {
+            params.append(item.name, item.value as string);
+          });
+        }
+        return {
+          url: "courses",
+          method: "GET",
+          params: params,
+        };
+      },
+      providesTags:['semester'],
+      transformResponse: (response: TResponseRedux<any>) => {
+        console.log("inside redux: ", response);
+        return {
+          data: response.data,
+          meta: response.meta,
+        };
+      },
+    }),
+    // Add new Coures
+    addCoures: builder.mutation({
+      query: (data) => ({
+        url: "courses/create-course",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ['semester']
+    }),
   }),
 });
 
-export const {useAllSemesterRegistedQuery,useAddSemesterRegisterMutation,useUpdateSemesterRegisterMutation} = academicMangmentApi;
+export const {useAddCouresMutation,useAllSemesterRegistedQuery,useAddSemesterRegisterMutation,useUpdateSemesterRegisterMutation,useGetAllCouresQuery} = academicMangmentApi;
