@@ -50,6 +50,30 @@ const usersManagementApi = baseApi.injectEndpoints({
         };
       },
     }),
+    getAllFaculties: builder.query({
+      query: (args) => {
+        console.log(args);
+        const params = new URLSearchParams();
+
+        if (args) {
+          args.forEach((item: TQueryParam) => {
+            params.append(item.name, item.value as string);
+          });
+        }
+
+        return {
+          url: '/faculties',
+          method: 'GET',
+          params: params,
+        };
+      },
+      transformResponse: (response: TResponseRedux<TStudent[]>) => {
+        return {
+          data: response.data,
+          meta: response.meta,
+        };
+      },
+    }),
     // Create Admin
     addAdmin: builder.mutation({
       query: (data) => {
@@ -63,5 +87,5 @@ const usersManagementApi = baseApi.injectEndpoints({
     }),
   }),
 });
-export const { useAddStudentMutation, useGetAllStudentsQuery, useAddAdminMutation,useAddFacultyMutation } =
+export const { useAddStudentMutation, useGetAllFacultiesQuery, useGetAllStudentsQuery, useAddAdminMutation,useAddFacultyMutation } =
   usersManagementApi;

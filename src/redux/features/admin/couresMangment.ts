@@ -77,7 +77,40 @@ const academicMangmentApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['semester']
     }),
+
+    addFaculties: builder.mutation({
+      query: (args) => ({
+        url: `/courses/${args.courseId}/assign-faculties`,
+        method: 'PUT',
+        body: args.data,
+      }),
+      invalidatesTags: ['courses'],
+    }),
+    getCourseFaculties: builder.query({
+      query: (id) => {
+        return {
+          url: `/courses/${id}/get-faculties`,
+          method: 'GET',
+        };
+      },
+      transformResponse: (response: TResponseRedux<any>) => {
+        return {
+          data: response.data,
+          meta: response.meta,
+        };
+      },
+    }),
+    createOfferedCourse: builder.mutation({
+      query: (data) => ({
+        url: `offered-courses/create-offered-course`,
+        method: 'POST',
+        body: data,
+      }),
+      invalidatesTags: ['courses'],
+    }),
   }),
 });
 
-export const {useAddCouresMutation,useAllSemesterRegistedQuery,useAddSemesterRegisterMutation,useUpdateSemesterRegisterMutation,useGetAllCouresQuery} = academicMangmentApi;
+export const {useAddCouresMutation,useAllSemesterRegistedQuery,useAddSemesterRegisterMutation,
+  useUpdateSemesterRegisterMutation,useGetAllCouresQuery, useAddFacultiesMutation,useCreateOfferedCourseMutation
+,useGetCourseFacultiesQuery} = academicMangmentApi;
