@@ -4,41 +4,48 @@ import PHSelect from "../../../componets/form/PHSelect";
 import { toast } from "sonner";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import PHInput from "../../../componets/form/PHInput";
-import { useAddCouresMutation, useGetAllCouresQuery } from "../../../redux/features/admin/couresMangment";
+import {
+  useAddCouresMutation,
+  useGetAllCouresQuery,
+} from "../../../redux/features/admin/couresMangment";
+import { TResponse } from "../../../types/globalType";
 
 const CreateCoures = () => {
   const { data: coures } = useGetAllCouresQuery(undefined);
-  const [addCoures] = useAddCouresMutation()
+  const [addCoures] = useAddCouresMutation();
   // console.log(coures);
-  const preRequisiteCoursesOptions = coures?.data?.map((item)=>({
+  const preRequisiteCoursesOptions = coures?.data?.map((item) => ({
     value: item._id,
-    label: item.title
-  }))
+    label: item.title,
+  }));
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("Createing......");
     const couresData = {
       ...data,
+      code: Number(data.code),
+      credits: Number(data.credits),
       isDeleted: false,
-      preRequisiteCourses: data.preRequisiteCourses.map((item)=>({
-        coures: item,
-        isDeleted: false
-      }))
-    }
+      preRequisiteCourses: data.preRequisiteCourses
+        ? data.preRequisiteCourses?.map((item) => ({
+            course: item,
+            isDeleted: false,
+          }))
+        : [],
+    };
     console.log(couresData);
-    const res=addCoures(couresData)
-    console.log(res);
-    // try {
-    //   const res = (await AddSemesterRegister(semesterData)) as TResponse<any>;
-    //   if (res.error) {
-    //     toast.error(res.error.data.message, { id: toastId });
-    //   } else {
-    //     toast.success("Semster Registed Succefully", { id: toastId });
-    //   }
-    //   console.log(res);
-    // } catch (err) {
-    //   toast.error("Something Went Wrong", { id: toastId });
-    //   console.log(err);
-    // }
+
+    try {
+      const res = (await addCoures(couresData)) as TResponse<any>;
+      if (res.error) {
+        toast.error(res.error.data.message, { id: toastId });
+      } else {
+        toast.success("Coures Registed Succefully", { id: toastId });
+      }
+      console.log(res);
+    } catch (err) {
+      toast.error("Something Went Wrong", { id: toastId });
+      console.log(err);
+    }
   };
   return (
     <Flex justify="center" align="center">
@@ -50,7 +57,7 @@ const CreateCoures = () => {
           <PHInput label="Credits" type="number" name="credits" />
           <PHSelect
             mode="multiple"
-            label="Pre RequisiteCourses"
+            label="PreRequisiteCourses"
             name="preRequisiteCourses"
             options={preRequisiteCoursesOptions}
           />

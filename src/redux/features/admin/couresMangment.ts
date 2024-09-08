@@ -61,7 +61,7 @@ const academicMangmentApi = baseApi.injectEndpoints({
       },
       providesTags:['semester'],
       transformResponse: (response: TResponseRedux<any>) => {
-        console.log("inside redux: ", response);
+        // console.log("inside redux: ", response);
         return {
           data: response.data,
           meta: response.meta,
